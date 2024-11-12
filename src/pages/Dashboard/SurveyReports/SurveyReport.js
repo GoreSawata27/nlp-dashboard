@@ -7,6 +7,7 @@ import Date from "./Date";
 export default function SurveyReport() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [questions, setQuestions] = useState("");
 
   const getSurveyReports = async () => {
     setLoading(true);
@@ -49,7 +50,9 @@ export default function SurveyReport() {
       <div className="head-container">
         <div className="main-title">Mentee Employment Outcome and Mentor Exit Survey Dashboard</div>
         <div className="filter-section">
-          <div className="date-picker-container">{/* <Date /> */}</div>
+          <div className="date-picker-container">
+            <Date />
+          </div>
           <div className="update-report-btn">
             <button disabled={loading} className="btn btn-orange" onClick={UpdateReports}>
               Update Report
@@ -67,7 +70,7 @@ export default function SurveyReport() {
               </svg>
             </div>
           ) : (
-            <Table data={data} />
+            <Table data={data} questions={questions} setQuestions={setQuestions} />
           )}
         </div>
         <div className="chart-container">
@@ -78,7 +81,7 @@ export default function SurveyReport() {
               </svg>
             </div>
           ) : (
-            <SurveyChart data={data} />
+            <SurveyChart data={data} questions={questions} setQuestions={setQuestions} />
           )}
         </div>
       </div>

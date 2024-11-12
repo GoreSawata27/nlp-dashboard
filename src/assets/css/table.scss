@@ -34,4 +34,11 @@
   td {
     border: 1px solid black;
   }
+  .td-data {
+    cursor: pointer;
+  }
+}
+
+.active-col {
+  background: #ffedd9;
 }

@@ -6,11 +6,14 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, LabelList } from "recharts";
 
-export default function SurveyChart({ data }) {
+export default function SurveyChart({ data, questions, setQuestions }) {
   const [barChartData, setBarChartData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [filter, setFilter] = useState("top10");
-  const [questions, setQuestions] = useState("");
+
+  const barHeight = 80;
+  const minHeight = 200;
+  const containerHeight = Math.max(filteredData.length * barHeight, minHeight);
 
   const handleChange = (event) => {
     setQuestions(event.target.value);
@@ -24,15 +27,12 @@ export default function SurveyChart({ data }) {
       newFilteredData = newFilteredData.filter((item) => item.question === selectedQuestion);
     }
 
-    // Apply Top 10, Next 10, or All filter
     if (filter === "top10") {
       newFilteredData = newFilteredData.slice(0, 10);
     }
 
     setFilteredData(newFilteredData);
   };
-
-  // Update bar chart data whenever the `data` prop changes
   useEffect(() => {
     const transformedData =
       data?.map((item) => ({
@@ -43,7 +43,7 @@ export default function SurveyChart({ data }) {
 
     setBarChartData(transformedData);
     applyFilter(transformedData, filter, questions);
-  }, [data]);
+  }, [data, questions, filter]); ///////////////////////////////////////////////////////check
 
   // Apply filter whenever the filter option or selected question changes
   useEffect(() => {
@@ -51,10 +51,6 @@ export default function SurveyChart({ data }) {
   }, [filter, barChartData, questions]);
 
   const uniqueQuestions = Array.from(new Set(data.map((item) => item.question)));
-
-  const barHeight = 80;
-  const minHeight = 200;
-  const containerHeight = Math.max(filteredData.length * barHeight, minHeight);
 
   return (
     <>

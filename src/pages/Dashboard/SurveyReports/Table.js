@@ -1,8 +1,12 @@
 import React from "react";
 
-export default function Table({ data }) {
+export default function Table({ data, questions, setQuestions }) {
   // Extract unique questions for header columns
   const uniqueQuestions = Array.from(new Set(data.map((item) => item.question)));
+
+  const FilterChartByQuestion = (question) => {
+    setQuestions(question);
+  };
 
   return (
     <div>
@@ -12,31 +16,41 @@ export default function Table({ data }) {
             <th>
               <div className="innerDiv">Categories</div>
             </th>
-            {uniqueQuestions?.map((question, index) => (
-              <th key={index}>
-                <div className="innerDiv">{question}</div>
+            {uniqueQuestions.map((question, index) => (
+              <th key={index} onClick={() => FilterChartByQuestion(question)}>
+                <div className={`innerDiv `}>{question}</div>
               </th>
             ))}
           </tr>
         </thead>
         <tbody>
-          {/* Row for count */}
           <tr>
             <td>Count</td>
-            {uniqueQuestions?.map((question, index) => {
+            {uniqueQuestions.map((question, index) => {
               const totalOccurrences = data
                 .filter((item) => item.question === question)
                 .reduce((acc, item) => acc + parseInt(item.occurances, 10), 0);
-              return <td key={index}>{totalOccurrences}</td>;
+              return (
+                <td
+                  key={index}
+                  // className={questions === question ? "active-col" : ""}
+                >
+                  {totalOccurrences}
+                </td>
+              );
             })}
           </tr>
-
-          {/* Rows for each categoryName */}
-          {data?.map((item, index) => (
+          {data.map((item, index) => (
             <tr key={index}>
               <td>{item.categoryName}</td>
               {uniqueQuestions.map((question, qIndex) => (
-                <td key={qIndex}>{item.question === question ? item.occurances : ""}</td>
+                <td
+                  key={qIndex}
+                  className={questions === question ? "active-col td-data" : "td-data"}
+                  onClick={() => FilterChartByQuestion(question)}
+                >
+                  {item.question === question ? item.occurances : ""}
+                </td>
               ))}
             </tr>
           ))}
