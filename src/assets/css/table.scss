@@ -1,0 +1,37 @@
+.angled-headers-table {
+  margin-right: 6em;
+  border-collapse: collapse;
+
+  th,
+  td {
+    padding: 0.5em;
+    border-top: 1px solid;
+  }
+
+  th {
+    padding: 0;
+    position: relative;
+    border: 1px solid;
+    > .innerDiv {
+      white-space: nowrap;
+      padding: 0.5em;
+      -webkit-writing-mode: vertical-lr;
+      writing-mode: vertical-lr;
+      transform: scale(1, 1) rotate(180deg);
+    }
+
+    &:first-child {
+      border-left: 1px solid;
+
+      > .innerDiv {
+        margin: 0;
+        writing-mode: horizontal-tb;
+        transform: none;
+      }
+    }
+  }
+
+  td {
+    border: 1px solid black;
+  }
+}

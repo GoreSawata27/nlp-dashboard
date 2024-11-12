@@ -1,0 +1,81 @@
+.data-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 15px;
+  margin-top: 30px;
+
+  .table-container,
+  .chart-container {
+    width: 48%;
+    height: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 8px;
+    background-color: white;
+    overflow-y: auto;
+  }
+}
+
+.chart-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .btn-container {
+    display: flex;
+    gap: 10px;
+    margin: 20px;
+  }
+
+  .pie-container {
+    padding: 30px 0 0 30px;
+  }
+
+  .pplot-container {
+    width: 96vw;
+    overflow-x: scroll;
+  }
+}
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 20px;
+}
+
+// filter chart btns
+.filter-data-btns {
+  height: 40px;
+  width: 100%;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+
+  .filter-btn {
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    background: #8f918f;
+    padding: 0 12px;
+    border-radius: 4px;
+
+    &.active {
+      color: white;
+      background: #f58f13;
+    }
+
+    button {
+      border: none;
+      outline: none;
+      background-color: transparent;
+      color: #fff;
+      display: flex;
+      font-size: 16px;
+      padding: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      line-height: 20px;
+      font-family: "Inter", sans-serif;
+    }
+  }
+}

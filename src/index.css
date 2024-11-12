@@ -1,0 +1,262 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;1,100;1,300;1,400&family=Open+Sans:wght@300;400;500;600;700;800&display=swap");
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+}
+
+.custom-toast {
+  max-width: 100% !important;
+}
+
+/*for react toast emoji */
+.go2358747891 {
+  transform: scale(1.6);
+  opacity: 0.7;
+}
+
+.gap-20 {
+  gap: 20px;
+}
+.react-datepicker__close-icon::after {
+  background-color: #f58f13 !important;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition: background-color 5000s ease-in-out 0s;
+  -webkit-text-fill-color: #000 !important;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+/* Overlay Styles */
+.spin-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.spin-spinner {
+  border: 8px solid white;
+  border-top: 8px solid #f58f13;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.userType-page {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+}
+
+/* distance slider ui */
+.slider-container {
+  display: flex;
+  align-items: end;
+  gap: 9px;
+}
+
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  border-radius: 5px;
+  outline: none;
+  margin-right: 10px;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  background: #f9f3eb;
+  cursor: pointer;
+  border-radius: 50%;
+  border: 3px solid #f58f13;
+}
+
+.slider::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  background: #f9f3eb;
+  cursor: pointyer;
+  border-radius: 50%;
+  border: 3px solid #f58f13;
+}
+.slider-number-input {
+  display: flex;
+  width: 58px;
+  padding: 12px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  border: 1px solid #cad0db;
+
+  background: #fff;
+  color: #7b8499;
+
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.slider-range {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 7px;
+}
+.slider-number {
+  color: #7b8499;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+}
+.slider-marks {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.file-upload-border {
+  border: 2px dashed #f1d8b9;
+}
+
+/* i image */
+.i-img {
+  background-color: transparent;
+  height: 15px !important;
+}
+
+.lable-helpText {
+  display: flex;
+  gap: 5px;
+}
+.lable-helpText h6 {
+  margin-bottom: 0 !important;
+}
+.react-datepicker__day--selected {
+  background-color: #f58f13 !important;
+}
+/* new pop up skills ui */
+
+.inp_cont {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0px;
+  border-radius: 4px;
+  border: 1px solid #bfbfbf !important;
+}
+
+.suggestions-list {
+  list-style-type: none;
+  padding: 0;
+  /* margin: 5px 0 0 0; */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  max-height: 200px;
+  overflow-y: auto;
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+}
+
+.suggestion-item {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.suggestion-item:hover {
+  /* background-color: #f0f0f0; */
+  background-color: #f58f13;
+  border-radius: 4px;
+  color: #fff;
+}
+
+.main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.icon_close {
+  height: 21px;
+  width: 20px;
+  cursor: pointer;
+}
+label {
+  line-height: 18px;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+
+/* MUI popup font family */
+
+.css-ix1f03-MuiTypography-root,
+.css-2ulfj5-MuiTypography-root {
+  font-family: "Inter", sans-serif !important;
+}
+
+/* logout btn */
+
+.logout-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  text-decoration: none;
+  width: 77px;
+  height: 31px;
+  background-color: #f58f13;
+  color: white;
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  border-radius: 6px;
+}
+@media only screen and (max-width: 767px) {
+  .logout-btn {
+    position: absolute;
+    top: 4px;
+    right: 15px;
+  }
+}
