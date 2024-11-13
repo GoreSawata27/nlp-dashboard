@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import _api from "../../../utils/apis/_api";
+import { Popover, Typography } from "@mui/material";
 
 export default function Table({ data, questions, setQuestions }) {
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [reviewData, setReviewData] = useState(null);
+
   // Extract unique questions for header columns
   const uniqueQuestions = Array.from(new Set(data.map((item) => item.question)));
 
@@ -12,11 +16,29 @@ export default function Table({ data, questions, setQuestions }) {
   const GetReviews = async () => {
     try {
       const res = await _api.get("/triec-survey/admin/1/feedback/categories/2/reviews");
-      console.log(res);
+
+      const firstReview = res.data.data.attribites[0]?.review;
+      setReviewData(firstReview);
     } catch (error) {
       console.log(error);
     }
   };
+
+  const handleCellClick = (event, item, question) => {
+    if (item.question === question && item.occurances) {
+      setAnchorEl(event.currentTarget);
+      FilterChartByQuestion(question);
+      GetReviews();
+    }
+  };
+
+  const handlePopoverClose = () => {
+    setAnchorEl(null);
+    setReviewData(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? "review-popover" : undefined;
 
   return (
     <div>
@@ -28,7 +50,7 @@ export default function Table({ data, questions, setQuestions }) {
             </th>
             {uniqueQuestions.map((question, index) => (
               <th key={index} onClick={() => FilterChartByQuestion(question)}>
-                <div className={`innerDiv `}>{question}</div>
+                <div className="innerDiv">{question}</div>
               </th>
             ))}
           </tr>
@@ -40,14 +62,7 @@ export default function Table({ data, questions, setQuestions }) {
               const totalOccurrences = data
                 .filter((item) => item.question === question)
                 .reduce((acc, item) => acc + parseInt(item.occurances, 10), 0);
-              return (
-                <td
-                  key={index}
-                  // className={questions === question ? "active-col" : ""}
-                >
-                  {totalOccurrences}
-                </td>
-              );
+              return <td key={index}>{totalOccurrences}</td>;
             })}
           </tr>
           {data.map((item, index) => (
@@ -57,7 +72,7 @@ export default function Table({ data, questions, setQuestions }) {
                 <td
                   key={qIndex}
                   className={questions === question ? "active-col td-data" : "td-data"}
-                  onClick={() => FilterChartByQuestion(question)}
+                  onClick={(event) => handleCellClick(event, item, question)}
                 >
                   {item.question === question ? item.occurances : ""}
                 </td>
@@ -66,6 +81,31 @@ export default function Table({ data, questions, setQuestions }) {
           ))}
         </tbody>
       </table>
+
+      <Popover
+        id={id}
+        open={open}
+        anchorEl={anchorEl}
+        onClose={handlePopoverClose}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "center",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "center",
+        }}
+      >
+        <Typography
+          sx={{
+            p: 2,
+            maxWidth: "350px",
+            overflowY: "auto",
+          }}
+        >
+          {reviewData || "Loading..."}
+        </Typography>
+      </Popover>
     </div>
   );
 }
