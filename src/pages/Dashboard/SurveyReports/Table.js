@@ -1,4 +1,5 @@
 import React from "react";
+import _api from "../../../utils/apis/_api";
 
 export default function Table({ data, questions, setQuestions }) {
   // Extract unique questions for header columns
@@ -6,6 +7,15 @@ export default function Table({ data, questions, setQuestions }) {
 
   const FilterChartByQuestion = (question) => {
     setQuestions(question);
+  };
+
+  const GetReviews = async () => {
+    try {
+      const res = await _api.get("/triec-survey/admin/1/feedback/categories/2/reviews");
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

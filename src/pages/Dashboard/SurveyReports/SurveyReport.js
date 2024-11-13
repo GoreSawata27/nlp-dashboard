@@ -55,19 +55,8 @@ export default function SurveyReport() {
     }
   };
 
-  const GetReviews = async () => {
-    setLoading(true);
-    try {
-      const res = await _api.get("/triec-survey/admin/1/feedback/categories/2/reviews");
-      console.log(res);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
     getSurveyReports();
-    GetReviews();
   }, []);
 
   return (

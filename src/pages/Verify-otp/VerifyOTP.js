@@ -9,7 +9,7 @@ import axios from "axios";
 const Optvalidation = () => {
   const [otp, setOtp] = useState("");
   const navigate = useNavigate();
-  const [remainingTime, setRemainingTime] = useState(300);
+  const [remainingTime, setRemainingTime] = useState(30);
   const [isResendEnabled, setIsResendEnabled] = useState(false);
   const [isVerifying, setIsVerifying] = useState(false);
 
@@ -19,7 +19,7 @@ const Optvalidation = () => {
         if (prevTime === 0) {
           clearInterval(window.otpTimer);
           setIsResendEnabled(true);
-          return 300;
+          return 30;
         } else {
           return prevTime - 1;
         }
@@ -111,7 +111,7 @@ const Optvalidation = () => {
     if (!isResendEnabled) return;
     try {
       setIsResendEnabled(false);
-      setRemainingTime(300);
+      setRemainingTime(30);
 
       const email = sessionStorage.getItem("TRIEC-email");
       const response = axios.post(
@@ -145,7 +145,7 @@ const Optvalidation = () => {
           if (prevTime === 0) {
             clearInterval(window.otpTimer);
             setIsResendEnabled(true);
-            return 300;
+            return 30;
           } else {
             return prevTime - 1;
           }
