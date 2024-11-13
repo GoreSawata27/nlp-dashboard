@@ -13,9 +13,9 @@ export default function Table({ data, questions, setQuestions }) {
     setQuestions(question);
   };
 
-  const GetReviews = async () => {
+  const GetReviews = async (categoryId) => {
     try {
-      const res = await _api.get("/triec-survey/admin/1/feedback/categories/2/reviews");
+      const res = await _api.get(`/triec-survey/admin/1/feedback/categories/${categoryId}/reviews`);
 
       const firstReview = res.data.data.attribites[0]?.review;
       setReviewData(firstReview);
@@ -28,7 +28,7 @@ export default function Table({ data, questions, setQuestions }) {
     if (item.question === question && item.occurances) {
       setAnchorEl(event.currentTarget);
       FilterChartByQuestion(question);
-      GetReviews();
+      GetReviews(item.categoryId);
     }
   };
 
