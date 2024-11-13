@@ -4,48 +4,78 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import Box from "@mui/material/Box";
-import Alert from "@mui/material/Alert";
+// import Alert from "@mui/material/Alert";
+import dayjs from "dayjs";
 
-export default function Date() {
-  const [cleared, setCleared] = React.useState(false);
+export default function DateRangePicker({ onDateChange }) {
+  const [fromDate, setFromDate] = React.useState(null);
+  const [toDate, setToDate] = React.useState(null);
+  // const [cleared, setCleared] = React.useState(false);
 
-  React.useEffect(() => {
-    if (cleared) {
-      const timeout = setTimeout(() => {
-        setCleared(false);
-      }, 1500);
+  const handleFromDateChange = (newValue) => {
+    setFromDate(newValue);
+    onDateChange({
+      fromDate: dayjs(newValue).format("DD-MM-YYYY"),
+      toDate: toDate ? dayjs(toDate).format("DD-MM-YYYY") : null,
+    });
+  };
 
-      return () => clearTimeout(timeout);
-    }
-    return () => {};
-  }, [cleared]);
+  const handleToDateChange = (newValue) => {
+    setToDate(newValue);
+    onDateChange({
+      fromDate: fromDate ? dayjs(fromDate).format("DD-MM-YYYY") : null,
+      toDate: dayjs(newValue).format("DD-MM-YYYY"),
+    });
+  };
+
+  // const handleClear = () => {
+  //   setFromDate(null);
+  //   setToDate(null);
+  //   setCleared(true);
+  //   onDateChange({ fromDate: null, toDate: null });
+  // };
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <Box
         sx={{
           width: "100%",
-          height: "50px",
+          height: "80px",
           display: "flex",
           justifyContent: "center",
+          alignItems: "center",
+          gap: 2,
           position: "relative",
-          focous: "none",
         }}
       >
         <DemoItem>
           <DesktopDatePicker
-            sx={{ width: 260, height: "44px" }}
+            label="From Date"
+            value={fromDate}
+            onChange={handleFromDateChange}
             slotProps={{
-              field: { clearable: true, onClear: () => setCleared(true) },
+              textField: {
+                sx: { height: "100%" },
+                inputProps: { style: { height: "100%", boxSizing: "border-box" } },
+              },
             }}
           />
         </DemoItem>
 
-        {cleared && (
-          <Alert sx={{ position: "absolute", bottom: 0, right: 0 }} severity="success">
-            Field cleared!
-          </Alert>
-        )}
+        <DemoItem>
+          <DesktopDatePicker
+            label="To Date"
+            value={toDate}
+            onChange={handleToDateChange}
+            minDate={fromDate}
+            slotProps={{
+              textField: {
+                sx: { height: "100%" },
+                inputProps: { style: { height: "100%", boxSizing: "border-box" } },
+              },
+            }}
+          />
+        </DemoItem>
       </Box>
     </LocalizationProvider>
   );

@@ -54,7 +54,7 @@ export default function SurveyChart({ data, questions, setQuestions }) {
 
   return (
     <>
-      <div style={{ width: "100%", height: 1000, maxHeight: 1000, overflowY: "auto" }}>
+      <div style={{ width: "100%", minHeight: 500, height: "100%" }}>
         <div className="filter-data-btns">
           <div style={{ display: "flex", gap: "5px" }}>
             <div className={`filter-btn ${filter === "top10" && "active"}`}>

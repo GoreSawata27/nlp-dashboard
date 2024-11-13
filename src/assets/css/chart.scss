@@ -10,6 +10,7 @@
     height: 100%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
+    margin-bottom: 40px;
     border-radius: 8px;
     background-color: white;
     overflow-y: auto;
@@ -38,20 +39,23 @@
 }
 .chart-header {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  padding-right: 20px;
+  margin: 5px 0;
 }
 
 // filter chart btns
 .filter-data-btns {
-  height: 40px;
   width: 100%;
-  margin-bottom: 20px;
+  height: 60px;
   display: flex;
+  align-items: center;
   justify-content: space-between;
   gap: 5px;
+  margin: 0 0 20px 0;
 
   .filter-btn {
+    height: 44px;
     display: flex;
     justify-items: center;
     align-items: center;
@@ -76,6 +80,81 @@
       cursor: pointer;
       line-height: 20px;
       font-family: "Inter", sans-serif;
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .data-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column-reverse;
+    gap: 15px;
+    margin-top: 80px;
+    .table-container,
+    .chart-container {
+      width: 90%;
+    }
+  }
+
+  .filter-data-btns {
+    height: 100px;
+    width: 100%;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .filter-btn {
+      button {
+        font-size: 14px;
+        padding: 10px;
+      }
+    }
+  }
+
+  .chart-header {
+    display: flex;
+    justify-content: space-between;
+    padding-right: 0;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+  .data-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column-reverse;
+    gap: 15px;
+
+    .table-container,
+    .chart-container {
+      width: 90%;
+    }
+  }
+
+  .chart-header {
+    display: flex;
+    justify-content: space-between;
+    padding-right: 0;
+  }
+
+  .filter-data-btns {
+    height: 40px;
+    width: 100%;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+
+    .filter-btn {
+      button {
+        font-size: 16px;
+      }
     }
   }
 }

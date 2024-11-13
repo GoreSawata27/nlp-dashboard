@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import _api from "../../../utils/apis/_api";
 import Table from "./Table";
 import SurveyChart from "./SurveyChart";
-import Date from "./Date";
+import DateRangePicker from "./Date";
+import toast from "react-hot-toast";
 
 export default function SurveyReport() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [questions, setQuestions] = useState("");
+  const [dateRange, setDateRange] = useState({ fromDate: null, toDate: null });
 
   const getSurveyReports = async () => {
     setLoading(true);
@@ -22,14 +24,37 @@ export default function SurveyReport() {
   };
 
   const UpdateReports = async () => {
+    if (!dateRange.fromDate || !dateRange.toDate) {
+      toast.error("Please select both 'From Date' and 'To Date' before updating the report.", {
+        duration: 3000,
+        position: "top-center",
+        className: "custom-toast",
+        iconTheme: {
+          primary: "#ffc107",
+        },
+      });
+      return;
+    }
+
     setLoading(true);
     try {
-      await _api.post("/triec-survey/admin/1/process-survey-responses");
+      await _api.post("/triec-survey/admin/1/process-survey-responses", {
+        data: {
+          type: "surveys",
+          attributes: {
+            "from-date": dateRange.fromDate,
+            "to-date": dateRange.toDate,
+          },
+        },
+      });
       getSurveyReports();
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
+
   const GetReviews = async () => {
     setLoading(true);
     try {
@@ -51,7 +76,7 @@ export default function SurveyReport() {
         <div className="main-title">Mentee Employment Outcome and Mentor Exit Survey Dashboard</div>
         <div className="filter-section">
           <div className="date-picker-container">
-            <Date />
+            <DateRangePicker onDateChange={setDateRange} />
           </div>
           <div className="update-report-btn">
             <button disabled={loading} className="btn btn-orange" onClick={UpdateReports}>

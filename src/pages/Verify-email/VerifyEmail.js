@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import LoginLogo from "../../assets/img/email.svg";
+// import LoginLogo from "../../assets/img/email.svg";
 import axios from "axios";
 
 const VerifyEmail = () => {
@@ -107,13 +107,11 @@ const VerifyEmail = () => {
 
   return (
     <div className="cntnt-wraper full-height flex-center">
-      <div className="triec-form txt-cntr">
-        <h1>
-          Thank you for choosing <span className="brnd-name">TRIEC</span>
-        </h1>
-        <img className="wlcom-img" width="224" alt="TRIEC verify mail" height="224" src={LoginLogo} />
+      <div className="triec-form dashboard-login ">
+        <h1>Dashboard Access</h1>
         <form className="email-vrfy-frm">
           <div className="frm-group">
+            <label htmlFor="">Email Address</label>
             <div className={`inpt-addon frm-field ${isFocused && !isValidEmail ? "draw-border" : ""}`}>
               <input
                 ref={otpInputRef}
