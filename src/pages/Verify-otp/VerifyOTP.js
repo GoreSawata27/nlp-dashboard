@@ -56,8 +56,7 @@ const Optvalidation = () => {
             attributes: {
               "email-address": userEmail,
               otp: parseInt(otp),
-              // "user-type": "admin",
-              "user-type": "mentor",
+              "user-type": "admin",
             },
           },
         },

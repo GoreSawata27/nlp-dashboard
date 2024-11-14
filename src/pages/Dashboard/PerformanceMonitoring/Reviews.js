@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import _api from "../../../utils/apis/_api";
 import { Rating } from "@mui/material";
+import toast from "react-hot-toast";
 
 export default function Reviews() {
   const [reviewData, setReviewData] = useState([]);
@@ -19,6 +20,30 @@ export default function Reviews() {
       const avgRating = totalRating / reviews.length;
       setAverageRating(avgRating);
     } catch (error) {
+      if (error?.response?.data?.errors) {
+        const apiErrors = error?.response?.data?.errors;
+        const errorMessage = apiErrors?.map((err) => err.detail)?.join(", ");
+        toast.error(errorMessage, {
+          duration: 3000,
+          position: "top-center",
+          className: "custom-toast",
+        });
+        return;
+      }
+      if (error?.response?.data?.message) {
+        toast.error(error?.response?.data?.message, {
+          duration: 3000,
+          position: "top-center",
+          className: "custom-toast",
+        });
+        return;
+      } else {
+        toast.error("An error occurred", {
+          duration: 3000,
+          position: "top-center",
+          className: "custom-toast",
+        });
+      }
       console.log(error);
     } finally {
       setLoading(false);

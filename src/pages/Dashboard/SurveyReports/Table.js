@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import _api from "../../../utils/apis/_api";
 import { Popover, Typography } from "@mui/material";
+import toast from "react-hot-toast";
 
 export default function Table({ data, questions, setQuestions }) {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -16,10 +17,33 @@ export default function Table({ data, questions, setQuestions }) {
   const GetReviews = async (categoryId) => {
     try {
       const res = await _api.get(`/triec-survey/admin/1/feedback/categories/${categoryId}/reviews`);
-
       const firstReview = res.data.data.attribites[0]?.review;
       setReviewData(firstReview);
     } catch (error) {
+      if (error?.response?.data?.errors) {
+        const apiErrors = error?.response?.data?.errors;
+        const errorMessage = apiErrors?.map((err) => err.detail)?.join(", ");
+        toast.error(errorMessage, {
+          duration: 3000,
+          position: "top-center",
+          className: "custom-toast",
+        });
+        return;
+      }
+      if (error?.response?.data?.message) {
+        toast.error(error?.response?.data?.message, {
+          duration: 3000,
+          position: "top-center",
+          className: "custom-toast",
+        });
+        return;
+      } else {
+        toast.error("An error occurred", {
+          duration: 3000,
+          position: "top-center",
+          className: "custom-toast",
+        });
+      }
       console.log(error);
     }
   };
