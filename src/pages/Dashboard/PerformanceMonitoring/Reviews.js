@@ -60,7 +60,7 @@ export default function Reviews() {
 
       <div className="review-container">
         {loading ? (
-          <div className="load center-loading">
+          <div className="load loading">
             <svg viewBox="25 25 50 50">
               <circle r="20" cy="50" cx="50"></circle>
             </svg>

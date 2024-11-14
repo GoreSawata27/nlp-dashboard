@@ -1,8 +1,10 @@
 .reviews {
   .reviews-header {
+    width: 90%;
+    margin: 0 auto;
     font-size: 20px;
     font-weight: bold;
-    padding: 20px;
+    padding: 20px 0;
     text-align: left;
   }
 
@@ -14,6 +16,11 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     background-color: white;
+    .loading {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
   }
 
   .review-heading {
@@ -55,7 +62,7 @@
     display: flex;
     flex-direction: column;
     gap: 15px;
-    justify-content: center;
+    justify-content: flex-start;
     text-transform: capitalize;
   }
 
