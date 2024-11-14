@@ -11,7 +11,7 @@ export default function Reviews() {
   const GetReviews = async () => {
     setLoading(true);
     try {
-      const res = await _api.get("/triec-feedback/admin/1/user-reviews");
+      const res = await _api.get(`/triec-feedback/admin/${sessionStorage.getItem("userID")}/user-reviews`);
       const reviews = res.data.data.attribites;
       setReviewData(reviews);
 

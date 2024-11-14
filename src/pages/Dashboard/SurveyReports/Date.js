@@ -4,36 +4,27 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import Box from "@mui/material/Box";
-// import Alert from "@mui/material/Alert";
 import dayjs from "dayjs";
 
 export default function DateRangePicker({ onDateChange }) {
   const [fromDate, setFromDate] = React.useState(null);
   const [toDate, setToDate] = React.useState(null);
-  // const [cleared, setCleared] = React.useState(false);
 
   const handleFromDateChange = (newValue) => {
     setFromDate(newValue);
     onDateChange({
-      fromDate: dayjs(newValue).format("DD-MM-YYYY"),
-      toDate: toDate ? dayjs(toDate).format("DD-MM-YYYY") : null,
+      fromDate: dayjs(newValue).format("MM-DD-YYYY"),
+      toDate: toDate ? dayjs(toDate).format("MM-DD-YYYY") : null,
     });
   };
 
   const handleToDateChange = (newValue) => {
     setToDate(newValue);
     onDateChange({
-      fromDate: fromDate ? dayjs(fromDate).format("DD-MM-YYYY") : null,
-      toDate: dayjs(newValue).format("DD-MM-YYYY"),
+      fromDate: fromDate ? dayjs(fromDate).format("MM-DD-YYYY") : null,
+      toDate: dayjs(newValue).format("MM-DD-YYYY"),
     });
   };
-
-  // const handleClear = () => {
-  //   setFromDate(null);
-  //   setToDate(null);
-  //   setCleared(true);
-  //   onDateChange({ fromDate: null, toDate: null });
-  // };
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>

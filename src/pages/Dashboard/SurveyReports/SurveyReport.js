@@ -11,10 +11,17 @@ export default function SurveyReport() {
   const [questions, setQuestions] = useState("");
   const [dateRange, setDateRange] = useState({ fromDate: null, toDate: null });
 
-  const getSurveyReports = async () => {
+  const getSurveyReports = async (startDate = null, endDate = null) => {
     setLoading(true);
     try {
-      const res = await _api.get("/triec-survey/admin/1/feedback/categories");
+      const url =
+        startDate && endDate
+          ? `/triec-survey/admin/${sessionStorage.getItem(
+              "userID"
+            )}/feedback/categories?from-date=${startDate}&to-date=${endDate}`
+          : `/triec-survey/admin/${sessionStorage.getItem("userID")}/feedback/categories`;
+
+      const res = await _api.get(url);
       setData(res.data.data.attribites);
     } catch (error) {
       if (error?.response?.data?.errors) {
@@ -62,7 +69,7 @@ export default function SurveyReport() {
 
     setLoading(true);
     try {
-      await _api.post("/triec-survey/admin/1/process-survey-responses", {
+      await _api.post(`/triec-survey/admin/${sessionStorage.getItem("userID")}/process-survey-responses`, {
         data: {
           type: "surveys",
           attributes: {
@@ -71,7 +78,7 @@ export default function SurveyReport() {
           },
         },
       });
-      getSurveyReports();
+      getSurveyReports(dateRange.fromDate, dateRange.toDate);
     } catch (error) {
       if (error?.response?.data?.errors) {
         const apiErrors = error?.response?.data?.errors;

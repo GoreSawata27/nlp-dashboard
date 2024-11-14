@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import _api from "../../../utils/apis/_api";
 import { Popover, Typography } from "@mui/material";
 import toast from "react-hot-toast";
-
+import { Tooltip as ReactTooltip } from "react-tooltip";
 export default function Table({ data, questions, setQuestions }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [reviewData, setReviewData] = useState(null);
@@ -16,7 +16,9 @@ export default function Table({ data, questions, setQuestions }) {
 
   const GetReviews = async (categoryId) => {
     try {
-      const res = await _api.get(`/triec-survey/admin/1/feedback/categories/${categoryId}/reviews`);
+      const res = await _api.get(
+        `/triec-survey/admin/${sessionStorage.getItem("userID")}/feedback/categories/${categoryId}/reviews`
+      );
       const firstReview = res.data.data.attribites[0]?.review;
       setReviewData(firstReview);
     } catch (error) {
@@ -75,10 +77,17 @@ export default function Table({ data, questions, setQuestions }) {
                   <div className="innerDiv">Categories</div>
                 </th>
                 {uniqueQuestions.map((question, index) => (
-                  <th key={index} onClick={() => FilterChartByQuestion(question)}>
+                  <th
+                    key={index}
+                    onClick={() => FilterChartByQuestion(question)}
+                    data-tooltip-id="questionTooltip"
+                    data-tooltip-html={`<div class="innerDiv">${question}</div>`}
+                    className={questions === question ? "active-col question-th " : "question-th"}
+                  >
                     <div className="innerDiv">{question}</div>
                   </th>
                 ))}
+                <ReactTooltip id="questionTooltip" place="top" style={{ maxWidth: "300px" }} />
               </tr>
             </thead>
             <tbody>
@@ -88,7 +97,11 @@ export default function Table({ data, questions, setQuestions }) {
                   const totalOccurrences = data
                     .filter((item) => item.question === question)
                     .reduce((acc, item) => acc + parseInt(item.occurances, 10), 0);
-                  return <td key={index}>{totalOccurrences}</td>;
+                  return (
+                    <td className={questions === question ? "active-col " : ""} key={index}>
+                      {totalOccurrences}
+                    </td>
+                  );
                 })}
               </tr>
               {data.map((item, index) => (

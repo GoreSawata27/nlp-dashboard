@@ -12,12 +12,14 @@
     padding: 0;
     position: relative;
     border: 1px solid;
+    max-height: 300px;
+    overflow: hidden;
+    cursor: pointer;
     > .innerDiv {
-      white-space: nowrap;
+      white-space: break-spaces;
       padding: 0.5em;
-      -webkit-writing-mode: vertical-lr;
-      writing-mode: vertical-lr;
-      transform: scale(1, 1) rotate(180deg);
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
     }
 
     &:first-child {
