@@ -105,7 +105,6 @@ export default function SurveyReport() {
         });
       }
       console.log(error);
-    } finally {
       setLoading(false);
     }
   };
