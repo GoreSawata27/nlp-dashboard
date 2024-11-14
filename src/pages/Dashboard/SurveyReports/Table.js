@@ -66,70 +66,76 @@ export default function Table({ data, questions, setQuestions }) {
 
   return (
     <div>
-      <table className="angled-headers-table">
-        <thead>
-          <tr>
-            <th>
-              <div className="innerDiv">Categories</div>
-            </th>
-            {uniqueQuestions.map((question, index) => (
-              <th key={index} onClick={() => FilterChartByQuestion(question)}>
-                <div className="innerDiv">{question}</div>
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Count</td>
-            {uniqueQuestions.map((question, index) => {
-              const totalOccurrences = data
-                .filter((item) => item.question === question)
-                .reduce((acc, item) => acc + parseInt(item.occurances, 10), 0);
-              return <td key={index}>{totalOccurrences}</td>;
-            })}
-          </tr>
-          {data.map((item, index) => (
-            <tr key={index}>
-              <td>{item.categoryName}</td>
-              {uniqueQuestions.map((question, qIndex) => (
-                <td
-                  key={qIndex}
-                  className={questions === question ? "active-col td-data" : "td-data"}
-                  onClick={(event) => handleCellClick(event, item, question)}
-                >
-                  {item.question === question ? item.occurances : ""}
-                </td>
+      {uniqueQuestions?.length > 0 ? (
+        <>
+          <table className="angled-headers-table">
+            <thead>
+              <tr>
+                <th>
+                  <div className="innerDiv">Categories</div>
+                </th>
+                {uniqueQuestions.map((question, index) => (
+                  <th key={index} onClick={() => FilterChartByQuestion(question)}>
+                    <div className="innerDiv">{question}</div>
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Count</td>
+                {uniqueQuestions.map((question, index) => {
+                  const totalOccurrences = data
+                    .filter((item) => item.question === question)
+                    .reduce((acc, item) => acc + parseInt(item.occurances, 10), 0);
+                  return <td key={index}>{totalOccurrences}</td>;
+                })}
+              </tr>
+              {data.map((item, index) => (
+                <tr key={index}>
+                  <td>{item.categoryName}</td>
+                  {uniqueQuestions.map((question, qIndex) => (
+                    <td
+                      key={qIndex}
+                      className={questions === question ? "active-col td-data" : "td-data"}
+                      onClick={(event) => handleCellClick(event, item, question)}
+                    >
+                      {item.question === question ? item.occurances : ""}
+                    </td>
+                  ))}
+                </tr>
               ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+            </tbody>
+          </table>
 
-      <Popover
-        id={id}
-        open={open}
-        anchorEl={anchorEl}
-        onClose={handlePopoverClose}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "center",
-        }}
-        transformOrigin={{
-          vertical: "top",
-          horizontal: "center",
-        }}
-      >
-        <Typography
-          sx={{
-            p: 2,
-            maxWidth: "350px",
-            overflowY: "auto",
-          }}
-        >
-          {reviewData || "Loading..."}
-        </Typography>
-      </Popover>
+          <Popover
+            id={id}
+            open={open}
+            anchorEl={anchorEl}
+            onClose={handlePopoverClose}
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "center",
+            }}
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "center",
+            }}
+          >
+            <Typography
+              sx={{
+                p: 2,
+                maxWidth: "350px",
+                overflowY: "auto",
+              }}
+            >
+              {reviewData || "Loading..."}
+            </Typography>
+          </Popover>
+        </>
+      ) : (
+        <h4>An error occurred or No Data Available</h4>
+      )}
     </div>
   );
 }

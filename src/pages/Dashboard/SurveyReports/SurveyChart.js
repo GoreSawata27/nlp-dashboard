@@ -43,7 +43,7 @@ export default function SurveyChart({ data, questions, setQuestions }) {
 
     setBarChartData(transformedData);
     applyFilter(transformedData, filter, questions);
-  }, [data, questions, filter]); ///////////////////////////////////////////////////////check
+  }, [data, questions, filter]);
 
   // Apply filter whenever the filter option or selected question changes
   useEffect(() => {
@@ -54,63 +54,76 @@ export default function SurveyChart({ data, questions, setQuestions }) {
 
   return (
     <>
-      <div style={{ width: "100%", minHeight: 500, height: "100%" }}>
-        <div className="filter-data-btns">
-          <div style={{ display: "flex", gap: "5px" }}>
-            <div className={`filter-btn ${filter === "top10" && "active"}`}>
-              <button onClick={() => setFilter("top10")}>Top 10 Categories</button>
-            </div>
+      {uniqueQuestions.length > 0 ? (
+        <>
+          <div style={{ width: "100%", minHeight: 500, height: "100%" }}>
+            <div className="filter-data-btns">
+              <div style={{ display: "flex", gap: "5px" }}>
+                <div className={`filter-btn ${filter === "top10" && "active"}`}>
+                  <button onClick={() => setFilter("top10")}>Top 10 Categories</button>
+                </div>
 
-            <div className={`filter-btn ${filter === "all" && "active"}`}>
-              <button onClick={() => setFilter("all")}>Show All Categories</button>
+                <div className={`filter-btn ${filter === "all" && "active"}`}>
+                  <button onClick={() => setFilter("all")}>Show All Categories</button>
+                </div>
+              </div>
+              <div className={`filter-btn  ${questions !== "" && "active"} `}>
+                <button onClick={() => setQuestions("")}>Reset Question</button>
+              </div>
+            </div>
+            <div className="sidebar">
+              <div className="chart-header">
+                <h3>Categories</h3>
+                <div className="dropdown">
+                  <Box sx={{ minWidth: 120 }}>
+                    <FormControl fullWidth>
+                      <InputLabel id="demo-simple-select-label">Questions</InputLabel>
+                      <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={questions}
+                        label="Questions"
+                        onChange={handleChange}
+                        renderValue={(selected) =>
+                          `${selected.slice(0, 25)}${selected.length > 25 ? "..." : ""}`
+                        } // Truncate selected display
+                      >
+                        {uniqueQuestions?.map((question, index) => (
+                          <MenuItem key={index} value={question}>
+                            {question}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+                  </Box>
+                </div>
+              </div>
+              <ResponsiveContainer width="100%" height={containerHeight}>
+                <BarChart data={filteredData} layout="vertical" barCategoryGap="10%">
+                  <XAxis type="number" hide />
+                  <YAxis
+                    type="category"
+                    dataKey="name"
+                    width={200}
+                    tick={{ fill: "#888888", fontSize: 14 }}
+                  />
+                  <Tooltip />
+                  <Bar dataKey="occurances" fill="#82ca9d" barSize={20}>
+                    <LabelList
+                      dataKey="occurances"
+                      position="right"
+                      offset={10}
+                      style={{ fill: "#888888", fontSize: 14 }}
+                    />
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
             </div>
           </div>
-          <div className={`filter-btn  ${questions !== "" && "active"} `}>
-            <button onClick={() => setQuestions("")}>Reset Question</button>
-          </div>
-        </div>
-        <div className="sidebar">
-          <div className="chart-header">
-            <h3>Categories</h3>
-            <div className="dropdown">
-              <Box sx={{ minWidth: 120 }}>
-                <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">Questions</InputLabel>
-                  <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={questions}
-                    label="Questions"
-                    onChange={handleChange}
-                    renderValue={(selected) => `${selected.slice(0, 25)}${selected.length > 25 ? "..." : ""}`} // Truncate selected display
-                  >
-                    {uniqueQuestions?.map((question, index) => (
-                      <MenuItem key={index} value={question}>
-                        {question}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-              </Box>
-            </div>
-          </div>
-          <ResponsiveContainer width="100%" height={containerHeight}>
-            <BarChart data={filteredData} layout="vertical" barCategoryGap="10%">
-              <XAxis type="number" hide />
-              <YAxis type="category" dataKey="name" width={200} tick={{ fill: "#888888", fontSize: 14 }} />
-              <Tooltip />
-              <Bar dataKey="occurances" fill="#82ca9d" barSize={20}>
-                <LabelList
-                  dataKey="occurances"
-                  position="right"
-                  offset={10}
-                  style={{ fill: "#888888", fontSize: 14 }}
-                />
-              </Bar>
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
-      </div>
+        </>
+      ) : (
+        <h4>An error occurred or No Data Available</h4>
+      )}
     </>
   );
 }
