@@ -69,11 +69,11 @@ export default function Reviews() {
           <>
             <div className="rating">
               <div className="review-heading"> Intake Form (Mentor & Mentee) </div>
-              <div className="average-score">{averageRating.toFixed(1)}</div>
+              <div className="average-score">{averageRating?.toFixed(1)}</div>
               <div className="star-rating">
                 <Rating value={averageRating} readOnly precision={0.5} />
               </div>
-              <div className="review-count">{reviewData.length} Reviews</div>
+              <div className="review-count">{reviewData?.length} Reviews</div>
             </div>
 
             <div className="comments">

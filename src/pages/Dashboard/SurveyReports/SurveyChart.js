@@ -111,9 +111,9 @@ export default function SurveyChart({ data, questions, setQuestions }) {
                   <Bar dataKey="occurances" fill="#82ca9d" barSize={20}>
                     <LabelList
                       dataKey="occurances"
-                      position="right"
-                      offset={10}
-                      style={{ fill: "#888888", fontSize: 14 }}
+                      position="insideRight"
+                      offset={15}
+                      style={{ fill: "#fff", fontSize: 14 }}
                     />
                   </Bar>
                 </BarChart>
