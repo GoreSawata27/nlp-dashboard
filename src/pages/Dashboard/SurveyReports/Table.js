@@ -67,7 +67,7 @@ export default function Table({ data, questions, setQuestions }) {
   const id = open ? "review-popover" : undefined;
 
   return (
-    <div>
+    <div className="table-continer-inner">
       {uniqueQuestions?.length > 0 ? (
         <>
           <table className="angled-headers-table">

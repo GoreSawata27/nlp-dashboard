@@ -37,7 +37,7 @@ export default function SurveyChart({ data, questions, setQuestions }) {
     const transformedData =
       data?.map((item) => ({
         name: item.categoryName,
-        occurances: parseInt(item.occurances, 10),
+        Occurrences: parseInt(item.occurances, 10),
         question: item.question,
       })) || [];
 
@@ -108,9 +108,9 @@ export default function SurveyChart({ data, questions, setQuestions }) {
                     tick={{ fill: "#888888", fontSize: 14 }}
                   />
                   <Tooltip />
-                  <Bar dataKey="occurances" fill="#82ca9d" barSize={20}>
+                  <Bar dataKey="Occurrences" fill="#82ca9d" barSize={20}>
                     <LabelList
-                      dataKey="occurances"
+                      dataKey="Occurrences"
                       position="insideRight"
                       offset={15}
                       style={{ fill: "#fff", fontSize: 14 }}
