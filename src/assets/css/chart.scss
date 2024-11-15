@@ -88,11 +88,12 @@
   .data-container {
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     flex-direction: column-reverse;
     gap: 15px;
     margin-top: 80px;
+
     .table-container,
     .chart-container {
       width: 90%;
@@ -109,9 +110,10 @@
   .filter-data-btns {
     height: 100px;
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     display: flex;
     flex-direction: column;
+    padding: 20px 0 0 0;
     gap: 10px;
 
     .filter-btn {
@@ -165,4 +167,10 @@
       }
     }
   }
+}
+
+.center-load-chart {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }

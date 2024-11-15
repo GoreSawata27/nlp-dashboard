@@ -141,9 +141,9 @@ export default function SurveyReport() {
             <Table data={data} questions={questions} setQuestions={setQuestions} />
           )}
         </div>
-        <div className="chart-container">
+        <div className="chart-container ">
           {loading ? (
-            <div className="load">
+            <div className="load center-load-chart">
               <svg viewBox="25 25 50 50">
                 <circle r="20" cy="50" cx="50"></circle>
               </svg>
