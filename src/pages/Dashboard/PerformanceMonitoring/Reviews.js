@@ -82,21 +82,6 @@ export default function Reviews() {
                   <p>{reviewObj.comments || "No comment provided"}</p>
                 </div>
               ))}
-              {reviewData.map((reviewObj, index) => (
-                <div key={index} className="review-item">
-                  <p>{reviewObj.comments || "No comment provided"}</p>
-                </div>
-              ))}
-              {reviewData.map((reviewObj, index) => (
-                <div key={index} className="review-item">
-                  <p>{reviewObj.comments || "No comment provided"}</p>
-                </div>
-              ))}
-              {reviewData.map((reviewObj, index) => (
-                <div key={index} className="review-item">
-                  <p>{reviewObj.comments || "No comment provided"}</p>
-                </div>
-              ))}
             </div>
           </>
         )}
