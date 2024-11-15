@@ -91,14 +91,14 @@ export default function Table({ data, questions, setQuestions }) {
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr className="count-tr">
                 <td>Count</td>
                 {uniqueQuestions.map((question, index) => {
                   const totalOccurrences = data
                     .filter((item) => item.question === question)
                     .reduce((acc, item) => acc + parseInt(item.occurances, 10), 0);
                   return (
-                    <td className={questions === question ? "active-col " : ""} key={index}>
+                    <td className={questions === question ? "active-col count-td " : "count-td"} key={index}>
                       {totalOccurrences}
                     </td>
                   );

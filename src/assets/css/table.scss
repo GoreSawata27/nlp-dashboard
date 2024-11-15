@@ -1,5 +1,5 @@
 .angled-headers-table {
-  margin-right: 6em;
+  // margin-right: 6em;
   border-collapse: collapse;
 
   th,
@@ -49,4 +49,9 @@
   width: 100%;
   display: flex;
   justify-content: center;
+}
+
+.count-tr {
+  background-color: #f2f2f2;
+  font-weight: bold;
 }

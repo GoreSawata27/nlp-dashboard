@@ -103,6 +103,9 @@
 }
 
 @media only screen and (max-width: 767px) {
+  .dashboard-login {
+    min-width: 340px;
+  }
   .header {
     height: 94px;
     width: 100%;
